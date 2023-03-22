@@ -82,9 +82,7 @@ class EditMatchTiles extends StatelessWidget {
                           rebuild();
                         } catch (e) {
                           print(e);
-                        }
-                        print(keyVal);
-                      },
+                        }},
                       icon: const Icon(
                         Icons.delete_outline_rounded,
                         color: Colors.red,

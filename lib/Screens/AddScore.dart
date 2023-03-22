@@ -20,39 +20,6 @@ class AddScore extends StatefulWidget {
   State<AddScore> createState() => _AddScoreState();
 }
 
-List<String> teamA = [
-  "Nuwan Prasanna",
-  "Kusal Munasinghe",
-  "Chinthaka Herath",
-  "Dulith",
-  "Sankalpa Nirmana",
-  "Naleen",
-  "Sasanka Dahanayake",
-  "Kithmi Kanaheraarachchi",
-  "Dilusha Sandaruwani"
-];
-
-List<String> teamB = [
-  "Tilanka Mihingu",
-  "Priyal",
-  "Kushan",
-  "Chamath",
-  "Chalani",
-  "Visal Gmage",
-  "Pabasara Meegahakumbura",
-  "Lihini Rajapaksha"
-];
-
-List<String> teamC = [
-  "Riyansi Liyanage",
-  "Rasika Suriarachchi",
-  "Sadun",
-  "Ashoka Pradeep",
-  "Thenuka",
-  "Achini",
-  "Menaka",
-  "Manjula"
-];
 
 List<Map> scoreList = [
   {"name": "0", "value": 0},
@@ -65,17 +32,7 @@ List<Map> scoreList = [
   {"name": "No-ball", "value": 2},
   {"name": "W", "value": 0},
 ];
-List<String> teamD = [
-  "Manul Binusha",
-  "Shamsh",
-  "Chatura",
-  "sachithra",
-  "Prasad",
-  "Isuru Wakkumbura",
-  "Asiri Dhanapala",
-  "Christina Edmund",
-  "Dinusha Saratchandra"
-];
+
 
 class _AddScoreState extends State<AddScore> {
   var battingTeam;
@@ -105,11 +62,11 @@ class _AddScoreState extends State<AddScore> {
 
     setState(() {
       if (widget.Batting == 'team1') {
-        battingTeam = selectTeam(widget.Team1[0]['id']);
-        bowlingTeam = selectTeam(widget.Team2[0]['id']);
+        battingTeam = Utils.selectTeam(widget.Team1[0]['id']);
+        bowlingTeam = Utils.selectTeam(widget.Team2[0]['id']);
       } else {
-        battingTeam = selectTeam(widget.Team2[0]['id']);
-        bowlingTeam = selectTeam(widget.Team1[0]['id']);
+        battingTeam = Utils.selectTeam(widget.Team2[0]['id']);
+        bowlingTeam = Utils.selectTeam(widget.Team1[0]['id']);
       }
     });
   }
@@ -318,19 +275,6 @@ class _AddScoreState extends State<AddScore> {
     );
   }
 
-  List<String>? selectTeam(int id) {
-    switch (id) {
-      case 1:
-        return teamA;
-      case 2:
-        return teamB;
-      case 3:
-        return teamC;
-      case 4:
-        return teamD;
-    }
-    return null;
-  }
 
   void _addToDB(String batsman1, String batsman2, String bowler, int mark,
       int wicket) async {
