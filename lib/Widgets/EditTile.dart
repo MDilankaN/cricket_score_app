@@ -4,17 +4,18 @@ class EditMatchTiles extends StatelessWidget {
   var data;
   var dbInstance;
   var keyVal;
+  final Function() rebuild;
 
-
-  EditMatchTiles({Key? key, required this.data, required this.keyVal, required this.dbInstance}) : super(key: key);
-
-
+  EditMatchTiles(
+      {Key? key,
+      required this.data,
+      required this.keyVal,
+      required this.dbInstance,
+      required this.rebuild})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-
-
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Row(
@@ -76,18 +77,31 @@ class EditMatchTiles extends StatelessWidget {
                 children: [
                   IconButton(
                       onPressed: () {
+                        try {
+                          dbInstance.child("match").child(keyVal).remove();
+                          rebuild();
+                        } catch (e) {
+                          print(e);
+                        }
                         print(keyVal);
                       },
-                      icon: Icon(Icons.delete_outline_rounded,color: Colors.red,)),
+                      icon: const Icon(
+                        Icons.delete_outline_rounded,
+                        color: Colors.red,
+                      )),
                   const SizedBox(
                     width: 10,
                   ),
-                  IconButton(onPressed: () {}, icon: Icon(Icons.edit_outlined,color: Colors.green,)),
+                  IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.edit_outlined,
+                        color: Colors.green,
+                      )),
                 ],
               ),
             ],
           ),
-
         ],
       ),
     );

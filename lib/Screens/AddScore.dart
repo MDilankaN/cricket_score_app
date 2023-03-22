@@ -126,7 +126,13 @@ class _AddScoreState extends State<AddScore> {
               color: Colors.white,
             ),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>  EditScore(path: path, title:"${widget.Team1[0]['name']} VS ${widget.Team2[0]['name']}" )));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => EditScore(
+                          path: path,
+                          title:
+                              "${widget.Team1[0]['name']} VS ${widget.Team2[0]['name']}")));
             },
           )
         ],
@@ -180,14 +186,19 @@ class _AddScoreState extends State<AddScore> {
               ],
             ),
           ),
-          Divider(height: 1, thickness: 5,),
+          Divider(
+            height: 1,
+            thickness: 5,
+          ),
           SizedBox(
             width: 400,
-
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Batsman 1', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                const Text(
+                  'Batsman 1',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                ),
                 const SizedBox(
                   width: 10,
                 ),
@@ -213,7 +224,10 @@ class _AddScoreState extends State<AddScore> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Batsman 2', style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                const Text(
+                  'Batsman 2',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                ),
                 const SizedBox(
                   width: 10,
                 ),
@@ -239,7 +253,10 @@ class _AddScoreState extends State<AddScore> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Bowler', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                const Text(
+                  'Bowler',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                ),
                 const SizedBox(
                   width: 35,
                 ),
@@ -280,21 +297,22 @@ class _AddScoreState extends State<AddScore> {
                     } else if (_bowler == null) {
                       Utils.showErrorDialog(context, 'Select Bowler');
                     } else {
-                      _addToDB(
-                          _batsman1!, _batsman2!, _bowler!, score["value"], score["name"] == "W" ? 1 : 0);
+                      _addToDB(_batsman1!, _batsman2!, _bowler!, score["value"],
+                          score["name"] == "W" ? 1 : 0);
                     }
                   },
-                  child: Text(score['name'], style: TextStyle(fontSize: 18),),
+                  child: Text(
+                    score['name'],
+                    style: TextStyle(fontSize: 18),
+                  ),
                 );
               }).toList(),
             ),
           ),
-
-          SizedBox(height: 50,),
-
-          ElevatedButton(onPressed: (){}, child: Text("End Match"))
-
-
+          SizedBox(
+            height: 50,
+          ),
+          ElevatedButton(onPressed: () {}, child: Text("End Match"))
         ],
       ),
     );
@@ -314,8 +332,8 @@ class _AddScoreState extends State<AddScore> {
     return null;
   }
 
-  void _addToDB(
-      String batsman1, String batsman2, String bowler, int mark, int wicket) async {
+  void _addToDB(String batsman1, String batsman2, String bowler, int mark,
+      int wicket) async {
     var total = 0;
     var wickets = 0;
     var ball = 1;
@@ -330,21 +348,19 @@ class _AddScoreState extends State<AddScore> {
       });
 
       _dbRef2.push().set({
-        'score':total + mark,
-        'wickets':wickets + wicket,
-        'balls':ball++,
+        'score': total + mark,
+        'wickets': wickets + wicket,
+        'balls': ball++,
         "path": path,
       });
 
       // _dbRefScore.child('score').r
-      
+
       print('Data added successfully');
     } catch (error) {
       print('Error adding data: $error');
     }
   }
-  
-  void updateScore(){
-    
-  }
+
+  void updateScore() {}
 }

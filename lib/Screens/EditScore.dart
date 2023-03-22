@@ -44,6 +44,8 @@ class _EditScoreState extends State<EditScore> {
         });
   }
 
+
+
   Widget handelSnapshotData(var data) {
     // Map<String, Map<String, dynamic>> childObjects = data.snapshot.value!;
     Map<dynamic, dynamic> childObjects = data.snapshot.value!;
@@ -64,6 +66,7 @@ class _EditScoreState extends State<EditScore> {
                       data: entry,
                       dbInstance: _dbRef,
                       keyVal: keys[index],
+                      rebuild:   _setState
                     ),
                     const Divider(
                       height: 2,
@@ -73,5 +76,10 @@ class _EditScoreState extends State<EditScore> {
                 );
               }),
         ));
+  }
+
+  void _setState() {
+    // Call setState() to trigger a rebuild of the widget tree
+    setState(() {});
   }
 }
