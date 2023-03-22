@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "530725892434",
+    "firebase_url": "https://score-board-eca1e-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "score-board-eca1e",
+    "storage_bucket": "score-board-eca1e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:530725892434:android:5d29c5dd201b597231ca8b",
+        "android_client_info": {
+          "package_name": "com.example.score_board"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "530725892434-214674b78r4f0qifl0grdk5qch3ipc16.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtTUbglMCFhPswStp9xL_XwmVwrzCaOu4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "530725892434-214674b78r4f0qifl0grdk5qch3ipc16.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "530725892434-ph2e4ao8rulrhj1km2bspc73ennfqgi9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.scoreBoard"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
