@@ -30,7 +30,7 @@ class EditMatchTiles extends StatelessWidget {
                     "Batsman - ${data.value['batsman1']}",
                     style: TextStyle(fontSize: 16),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Text(
@@ -39,7 +39,7 @@ class EditMatchTiles extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Column(
@@ -49,7 +49,7 @@ class EditMatchTiles extends StatelessWidget {
                     "Bowler - ${data.value['bowler']}",
                     style: TextStyle(fontSize: 16),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Text(
@@ -65,7 +65,7 @@ class EditMatchTiles extends StatelessWidget {
             children: [
               Text(
                 "Points - ${data.value['point']}",
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
             ],
           ),
@@ -79,7 +79,7 @@ class EditMatchTiles extends StatelessWidget {
                         print(keyVal);
                       },
                       icon: Icon(Icons.delete_outline_rounded,color: Colors.red,)),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   IconButton(onPressed: () {}, icon: Icon(Icons.edit_outlined,color: Colors.green,)),

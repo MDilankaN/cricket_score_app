@@ -65,7 +65,7 @@ class _EditScoreState extends State<EditScore> {
                       dbInstance: _dbRef,
                       keyVal: keys[index],
                     ),
-                    Divider(
+                    const Divider(
                       height: 2,
                       thickness: 2,
                     )
