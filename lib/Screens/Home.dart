@@ -27,16 +27,7 @@ class _HomeState extends State<Home> {
   int? _isSelectedTeam2;
   battingTeam _whichTeamBatting = battingTeam.team1;
 
-  List<Map> teamList = [
-    {'id': 1, 'name': 'Hit Squad', 'logo': 'assets/logos/HitSquad.png'},
-    {'id': 2, 'name': 'Zorro Zebras', 'logo': 'assets/logos/ZorroZebras.png'},
-    {
-      'id': 3,
-      'name': 'ZorroCyclones',
-      'logo': 'assets/logos/ZorroCyclones.png'
-    },
-    {'id': 4, 'name': 'Zeagles', 'logo': 'assets/logos/Zeagles.png'}
-  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +68,7 @@ class _HomeState extends State<Home> {
                               _isSelectedTeam1 = newValue as int?;
                             });
                           },
-                          items: teamList.map((team) {
+                          items: Utils.teamList.map((team) {
                             return DropdownMenuItem(
                                 value: team['id'],
                                 child: Row(
@@ -109,7 +100,7 @@ class _HomeState extends State<Home> {
                               _isSelectedTeam2 = newValue as int?;
                             });
                           },
-                          items: teamList.map((team) {
+                          items: Utils.teamList.map((team) {
                             return DropdownMenuItem(
                                 value: team['id'],
                                 child: Row(
@@ -194,11 +185,11 @@ class _HomeState extends State<Home> {
                               context,
                               MaterialPageRoute(
                                   builder: ((context) => AddScore(
-                                        Team1: teamList
+                                        Team1: Utils.teamList
                                             .where((team) =>
                                                 team['id'] == _isSelectedTeam1)
                                             .toList(),
-                                        Team2: teamList
+                                        Team2: Utils.teamList
                                             .where((team) =>
                                                 team['id'] == _isSelectedTeam2)
                                             .toList(),

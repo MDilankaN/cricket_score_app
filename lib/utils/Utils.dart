@@ -63,6 +63,17 @@ class Utils {
     return null;
   }
 
+  static   List<Map> teamList = [
+    {'id': 1, 'name': 'Hit Squad', 'logo': 'assets/logos/HitSquad.png'},
+    {'id': 2, 'name': 'Zorro Zebras', 'logo': 'assets/logos/ZorroZebras.png'},
+    {
+      'id': 3,
+      'name': 'ZorroCyclones',
+      'logo': 'assets/logos/ZorroCyclones.png'
+    },
+    {'id': 4, 'name': 'Zeagles', 'logo': 'assets/logos/Zeagles.png'}
+  ];
+
   static showErrorDialog(BuildContext context,String msg) async {
     return showDialog<void>(
       context: context,
