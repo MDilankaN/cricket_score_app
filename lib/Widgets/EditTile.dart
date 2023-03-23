@@ -1,16 +1,21 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class EditMatchTiles extends StatelessWidget {
   var data;
   var dbInstance;
+  var markTotalDBref;
   var keyVal;
+  var path;
   final Function() rebuild;
 
   EditMatchTiles(
       {Key? key,
       required this.data,
       required this.keyVal,
+      required this.path,
       required this.dbInstance,
+      required this.markTotalDBref,
       required this.rebuild})
       : super(key: key);
 
@@ -79,6 +84,12 @@ class EditMatchTiles extends StatelessWidget {
                       onPressed: () {
                         try {
                           dbInstance.child("match").child(keyVal).remove();
+                          markTotalDBref.child(path).update({
+                            'score': ServerValue.increment(-data.value['point']),
+                            'wickets': ServerValue.increment(data.value['out'] ? -1 : 0) ,
+                            'balls': ServerValue.increment(-1),
+
+                          });
                           rebuild();
                         } catch (e) {
                           print(e);

@@ -20,7 +20,6 @@ class AddScore extends StatefulWidget {
   State<AddScore> createState() => _AddScoreState();
 }
 
-
 List<Map> scoreList = [
   {"name": "0", "value": 0},
   {"name": "1", "value": 1},
@@ -32,7 +31,6 @@ List<Map> scoreList = [
   {"name": "No-ball", "value": 2},
   {"name": "W", "value": 0},
 ];
-
 
 class _AddScoreState extends State<AddScore> {
   var battingTeam;
@@ -275,7 +273,6 @@ class _AddScoreState extends State<AddScore> {
     );
   }
 
-
   void _addToDB(String batsman1, String batsman2, String bowler, int mark,
       bool wicket) async {
     var total = 0;
@@ -293,12 +290,12 @@ class _AddScoreState extends State<AddScore> {
         'time': time
       });
 
-      // _dbRef2.child(path).set({
-      //   'score': total + mark,
-      //   'wickets': wickets + wicket,
-      //   'balls': ball++,
-      //   "path": path,
-      // });
+
+      _dbRef2.child(path).update({
+        'score': ServerValue.increment(mark),
+        'wickets': ServerValue.increment(wicket ? 1 : 0) ,
+        'balls': ServerValue.increment(1),
+      });
 
       // _dbRef2.child(path).runTransaction((value) async  {
       //   var snapshot = await value.get(_dbRef2.child(path));
@@ -313,7 +310,6 @@ class _AddScoreState extends State<AddScore> {
       // }).catchError((error) {
       //   print('Failed to increment score for match $path: $error');
       // });
-
 
       print('Data added successfully');
     } catch (error) {

@@ -15,11 +15,13 @@ class EditScore extends StatefulWidget {
 
 class _EditScoreState extends State<EditScore> {
   late DatabaseReference _dbRef;
+  late DatabaseReference _dbRefTotal;
 
   @override
   void initState() {
     print(widget.path);
     _dbRef = FirebaseDatabase.instance.ref(widget.path);
+    _dbRefTotal = FirebaseDatabase.instance.ref('currentMatchScore');
     super.initState();
   }
 
@@ -64,9 +66,11 @@ class _EditScoreState extends State<EditScore> {
                   children: [
                     EditMatchTiles(
                       data: entry,
+                      path: widget.path,
                       dbInstance: _dbRef,
                       keyVal: keys[index],
-                      rebuild:   _setState
+                      rebuild:   _setState,
+                       markTotalDBref: _dbRefTotal
                     ),
                     const Divider(
                       height: 2,

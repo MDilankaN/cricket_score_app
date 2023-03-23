@@ -4,6 +4,8 @@ import 'package:score_board/Widgets/LiveScores.dart';
 import 'package:score_board/utils/Utils.dart';
 import 'dart:async';
 
+import '../Widgets/LiveScoreTile.dart';
+
 class ViewScore extends StatefulWidget {
   const ViewScore({Key? key}) : super(key: key);
 
@@ -13,13 +15,14 @@ class ViewScore extends StatefulWidget {
 
 class _ViewScoreState extends State<ViewScore> {
   late DatabaseReference _dbRef;
+  late DatabaseReference _dbRefScore;
 
   @override
   void initState() {
     super.initState();
     _dbRef = FirebaseDatabase.instance.ref('currentMatch');
+    _dbRefScore = FirebaseDatabase.instance.ref('currentMatchScore');
   }
-
 
   void _setState() {
     // Call setState() to trigger a rebuild of the widget tree
@@ -31,17 +34,22 @@ class _ViewScoreState extends State<ViewScore> {
   // _setState();
   // });
 
+
   @override
   Widget build(BuildContext context) {
+
+    print(_dbRef);
     return StreamBuilder(
         stream: _dbRef.onValue,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             print(snapshot.data);
             return handelSnapshotData(snapshot.data);
-          } else if (snapshot.hasError) {
+          }
+          if (snapshot.hasError) {
             return Text('Error ${snapshot.error.toString()}');
-          } else if (!snapshot.hasData) {
+          }
+          if (!snapshot.hasData || snapshot.data?.snapshot.value == null) {
             return const Center(
               child: SizedBox(
                   width: 30, height: 30, child: CircularProgressIndicator()),
@@ -54,6 +62,16 @@ class _ViewScoreState extends State<ViewScore> {
 
   Widget handelSnapshotData(var data) {
     Map<dynamic, dynamic> dataValues = data.snapshot.value!;
+
+    // if (dataValues == null) {
+    //   return Scaffold(
+    //       appBar: AppBar(
+    //         title: const Text('Score Board'),
+    //       ),
+    //       body: const Center(
+    //         child: Text('No Match Found.'),
+    //       ));
+    // }
 
     var team1Members = Utils.selectTeam(dataValues['Team1']);
     var team2Members = Utils.selectTeam(dataValues['Team2']);
@@ -121,10 +139,24 @@ class _ViewScoreState extends State<ViewScore> {
             const Divider(
               thickness: 5,
             ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: SizedBox(
+                height: 150,
+                child: LiveScoreTile(dbRef: _dbRefScore, path:dataValues['path'] ),
+              ),
+            ),
             const Divider(
               thickness: 5,
             ),
-            SizedBox(height: 400, child: LiveScores(path: dataValues['path'],)),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: SizedBox(
+                  height: 400,
+                  child: LiveScores(
+                    path: dataValues['path'],
+                  )),
+            ),
           ],
         ));
   }
