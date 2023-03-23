@@ -255,7 +255,7 @@ class _AddScoreState extends State<AddScore> {
                       Utils.showErrorDialog(context, 'Select Bowler');
                     } else {
                       _addToDB(_batsman1!, _batsman2!, _bowler!, score["value"],
-                          score["name"] == "W" ? 1 : 0);
+                          score["name"] == "W" ? true : false);
                     }
                   },
                   child: Text(
@@ -277,7 +277,7 @@ class _AddScoreState extends State<AddScore> {
 
 
   void _addToDB(String batsman1, String batsman2, String bowler, int mark,
-      int wicket) async {
+      bool wicket) async {
     var total = 0;
     var wickets = 0;
     var ball = 1;
@@ -286,19 +286,34 @@ class _AddScoreState extends State<AddScore> {
       await _dbRef.child("match").push().set({
         'batsman1': batsman1,
         'batsman2': batsman2,
+        'out': wicket,
+        'wicket_count': wicket ? 1 : 0,
         'bowler': bowler,
         'point': mark,
         'time': time
       });
 
-      _dbRef2.push().set({
-        'score': total + mark,
-        'wickets': wickets + wicket,
-        'balls': ball++,
-        "path": path,
-      });
+      // _dbRef2.child(path).set({
+      //   'score': total + mark,
+      //   'wickets': wickets + wicket,
+      //   'balls': ball++,
+      //   "path": path,
+      // });
 
-      // _dbRefScore.child('score').r
+      // _dbRef2.child(path).runTransaction((value) async  {
+      //   var snapshot = await value.get(_dbRef2.child(path));
+      //
+      //   int currentScore = snapshot.value ?? 0;
+      //   int newScore = currentScore + mark;
+      //   value.update(_dbRef2.child(path).child('score'), newScore);
+      //
+      //   return {'score': newScore};
+      // } as TransactionHandler).then((data) {
+      //   print('Score incremented to ${data} for match $path');
+      // }).catchError((error) {
+      //   print('Failed to increment score for match $path: $error');
+      // });
+
 
       print('Data added successfully');
     } catch (error) {

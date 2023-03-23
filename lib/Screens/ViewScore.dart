@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:score_board/Widgets/LiveScores.dart';
 import 'package:score_board/utils/Utils.dart';
+import 'dart:async';
 
 class ViewScore extends StatefulWidget {
   const ViewScore({Key? key}) : super(key: key);
@@ -19,6 +20,17 @@ class _ViewScoreState extends State<ViewScore> {
     _dbRef = FirebaseDatabase.instance.ref('currentMatch');
   }
 
+
+  void _setState() {
+    // Call setState() to trigger a rebuild of the widget tree
+    setState(() {});
+  }
+
+  // static const oneSec = Duration(seconds:1);
+  // Timer.periodic(oneSec, (timer) {
+  // _setState();
+  // });
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -30,12 +42,12 @@ class _ViewScoreState extends State<ViewScore> {
           } else if (snapshot.hasError) {
             return Text('Error ${snapshot.error.toString()}');
           } else if (!snapshot.hasData) {
-            return const Center(child: Text('No data found.'));
-          } else {
             return const Center(
               child: SizedBox(
                   width: 30, height: 30, child: CircularProgressIndicator()),
             );
+          } else {
+            return const Center(child: Text('No data found.'));
           }
         });
   }
@@ -112,9 +124,7 @@ class _ViewScoreState extends State<ViewScore> {
             const Divider(
               thickness: 5,
             ),
-            SizedBox(
-              height: 400,
-                child: LiveScores(path: dataValues['path'])),
+            SizedBox(height: 400, child: LiveScores(path: dataValues['path'],)),
           ],
         ));
   }
