@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:score_board/Screens/TournamentHistory.dart';
 import 'package:score_board/Screens/ViewScore.dart';
 import 'package:score_board/utils/Utils.dart';
 
@@ -242,7 +243,45 @@ class _HomeState extends State<Home> {
                   )
                 ],
               ),
-            )
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+              child: Divider(
+                height: 2,
+                thickness: 5,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  const Text(
+                    'Tournament History',
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      fixedSize: MaterialStateProperty.all<Size>(
+                        const Size(
+                            200, 50), // set the width and height of the button
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) => const TournamentHistory())));
+                    },
+                    child: const Text(
+                      'Tournament History',
+                    ),
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),

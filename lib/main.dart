@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       ),
       home: EasySplashScreen(
         logo: Image.asset('assets/logos/loading.png', height: 312,),
-        durationInSeconds: 4,
+        durationInSeconds: 1,
         navigator: Home(),
         title: new Text(
           'Welcome',

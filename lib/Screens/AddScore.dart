@@ -231,7 +231,7 @@ class _AddScoreState extends State<AddScore> {
                       Utils.showErrorDialog(context, 'Select Bowler');
                     } else {
                       _addToDB(_batsman1!, _bowler!, score["value"],score["name"],
-                          score["name"] == "W" ? true : false);
+                          score["name"] == "Wicket" ? true : false);
                     }
                   },
                   child: Text(

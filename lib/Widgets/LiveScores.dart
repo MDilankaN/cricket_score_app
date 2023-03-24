@@ -111,6 +111,8 @@ class LiveScores extends StatelessWidget {
     Map<dynamic, dynamic> childObjects = data.snapshot.value!;
     List<String> keys = data.snapshot.value.keys.toList();
 
+    print(childObjects);
+
     return Center(
       child: ListView.builder(
           itemCount: childObjects.length,
@@ -122,6 +124,9 @@ class LiveScores extends StatelessWidget {
                 const Divider(
                   height: 2,
                   thickness: 2,
+                ),
+                SizedBox(
+                  height: 2,
                 )
               ],
             );

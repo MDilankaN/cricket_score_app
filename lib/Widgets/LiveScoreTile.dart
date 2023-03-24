@@ -31,8 +31,8 @@ class LiveScoreTile extends StatelessWidget {
 
     return Column(
       children: [
-        Text("Score   ${dataValues['score']} / ${dataValues['wickets']}", style:  TextStyle(fontSize: 25),),
-        Text('Overs   ${ballsToOvers(dataValues['balls'])}'),
+        Text("Score   ${dataValues['score']} / ${dataValues['wickets']}", style:  TextStyle(fontSize: 200),),
+        Text('Overs   ${ballsToOvers(dataValues['balls'])}', style:  TextStyle(fontSize: 175),),
 
       ],
     );

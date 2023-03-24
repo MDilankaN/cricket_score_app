@@ -142,7 +142,7 @@ class _ViewScoreState extends State<ViewScore> {
             Padding(
               padding: const EdgeInsets.all(10),
               child: SizedBox(
-                height: 150,
+                height: 440,
                 child: LiveScoreTile(dbRef: _dbRefScore, path:dataValues['path'] ),
               ),
             ),
@@ -150,9 +150,9 @@ class _ViewScoreState extends State<ViewScore> {
               thickness: 5,
             ),
             Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.only(left: 10,right: 10,top: 2,bottom: 10),
               child: SizedBox(
-                  height: 400,
+                  height: 200,
                   child: LiveScores(
                     path: dataValues['path'],
                   )),

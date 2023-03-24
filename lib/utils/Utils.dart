@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class Utils {
-
   static List<String> teamA = [
     "Nuwan Prasanna",
     "Kusal Munasinghe",
@@ -48,7 +47,6 @@ class Utils {
     "Dinusha Saratchandra"
   ];
 
-
   static List<String>? selectTeam(int id) {
     switch (id) {
       case 1:
@@ -63,7 +61,49 @@ class Utils {
     return null;
   }
 
-  static   List<Map> teamList = [
+  static bool isFirstLastLetterEqual(String str1, String str2) {
+    if (str1.isEmpty || str2.isEmpty) {
+      return false;
+    }
+
+    String firstLetterOfString1 = str1[0];
+    String firstLetterOfString2 = str2[0];
+    String lastLetterOfString1 = str1[str1.length - 1];
+    String lastLetterOfString2 = str2[str2.length - 1];
+
+    return firstLetterOfString1 == lastLetterOfString2 &&
+        firstLetterOfString2 == lastLetterOfString1;
+  }
+
+  static String selectTeamMatch(String matchPath) {
+    String name = '';
+    if (matchPath.isEmpty) {
+      return 'matchPath';
+    }
+    String firstLetterOfString = matchPath[0];
+    String lastLetterOfString = matchPath[matchPath.length - 1];
+
+    name  = "${getTeamName(firstLetterOfString)} VS ${getTeamName(lastLetterOfString)}";
+
+    return name;
+  }
+
+  static String getTeamName(String number) {
+    switch (number) {
+      case '1':
+        return 'Hit Squad';
+      case '2':
+        return 'Zorro Zebras';
+      case '3':
+        return 'ZorroCyclones';
+      case '4':
+        return 'Zeagles';
+      default:
+        return '';
+    }
+  }
+
+  static List<Map> teamList = [
     {'id': 1, 'name': 'Hit Squad', 'logo': 'assets/logos/HitSquad.png'},
     {'id': 2, 'name': 'Zorro Zebras', 'logo': 'assets/logos/ZorroZebras.png'},
     {
@@ -74,7 +114,7 @@ class Utils {
     {'id': 4, 'name': 'Zeagles', 'logo': 'assets/logos/Zeagles.png'}
   ];
 
-  static showErrorDialog(BuildContext context,String msg) async {
+  static showErrorDialog(BuildContext context, String msg) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
