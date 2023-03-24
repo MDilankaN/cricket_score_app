@@ -27,7 +27,7 @@ List<Map> scoreList = [
   {"name": "3", "value": 3, "color": Colors.green},
   {"name": "4", "value": 4, "color": Colors.green},
   {"name": "6", "value": 6, "color": Colors.green},
-  {"name": "Wide", "value": 2, "color": Colors.orange},
+  {"name": "Wide", "value": 4, "color": Colors.orange},
   {"name": "No-ball", "value": 2, "color": Colors.orange},
   {"name": "Wicket", "value": 0, "color": Colors.red},
 ];

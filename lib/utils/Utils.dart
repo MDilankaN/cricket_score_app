@@ -83,7 +83,8 @@ class Utils {
     String firstLetterOfString = matchPath[0];
     String lastLetterOfString = matchPath[matchPath.length - 1];
 
-    name  = "${getTeamName(firstLetterOfString)} VS ${getTeamName(lastLetterOfString)}";
+    name =
+        "${getTeamName(firstLetterOfString)} VS ${getTeamName(lastLetterOfString)}";
 
     return name;
   }
@@ -98,6 +99,22 @@ class Utils {
         return 'ZorroCyclones';
       case '4':
         return 'Zeagles';
+      default:
+        return '';
+    }
+  }
+
+  static String getTeamLogo(String id) {
+
+    switch (id) {
+      case "1":
+        return 'assets/logos/HitSquad.png';
+      case "2":
+        return 'assets/logos/ZorroZebras.png';
+      case "3":
+        return 'assets/logos/ZorroCyclones.png';
+      case "4":
+        return 'assets/logos/Zeagles.png';
       default:
         return '';
     }

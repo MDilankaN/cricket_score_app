@@ -68,41 +68,57 @@ class _TournamentHistoryState extends State<TournamentHistory> {
                 padding: const EdgeInsets.all(5),
                 child: Column(
                   children: [
-                    Text(
-                      Utils.selectTeamMatch(keys[index]),
-                      style: const TextStyle(fontSize: 20),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "Score ${match['score']}",
-                          style: const TextStyle(fontSize: 18),
+                        Image.asset(Utils.getTeamLogo(keys[index][0]), width: 100,),
+                        SizedBox(width: 20,),
+                        Column(
+                          children: [
+                            Text(
+                              Utils.selectTeamMatch(keys[index]),
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Score ${match['score']}",
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "Balls ${match['balls']}",
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "Wickets ${match['wickets']}",
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                              ],
+                            ),
+                            const Divider(
+                              thickness: 5,
+                            )
+                          ],
                         ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Balls ${match['balls']}",
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Wickets ${match['wickets']}",
-                          style: const TextStyle(fontSize: 18),
-                        ),
+                        SizedBox(width: 20,),
+                        Image.asset(Utils.getTeamLogo(keys[index][keys[index].length - 1]), width: 100,),
+
                       ],
                     ),
-                    const Divider(
-                      thickness: 5,
-                    )
+                    Divider(thickness: 5,color: Colors.green,)
                   ],
                 ),
+
               );
             }));
   }

@@ -93,7 +93,7 @@ class _ViewScoreState extends State<ViewScore> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Column(
+                  Row(
                     children: [
                       Image.asset(
                         team1Data[0]['logo'],
@@ -117,7 +117,7 @@ class _ViewScoreState extends State<ViewScore> {
                           TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
                     ),
                   ),
-                  Column(
+                  Row(
                     children: [
                       Image.asset(
                         team2Data[0]['logo'],
