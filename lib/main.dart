@@ -1,3 +1,4 @@
+import 'package:easy_splash_screen/easy_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:score_board/Screens/Home.dart';
@@ -22,7 +23,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const Home(),
+      home: EasySplashScreen(
+        logo: Image.asset('assets/logos/loading.png', height: 312,),
+        durationInSeconds: 4,
+        navigator: Home(),
+        title: new Text(
+          'Welcome',
+          style: new TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.white),
+        ),
+        backgroundColor: Colors.white,
+      ),
     );
   }
 }

@@ -21,15 +21,15 @@ class AddScore extends StatefulWidget {
 }
 
 List<Map> scoreList = [
-  {"name": "0", "value": 0},
-  {"name": "1", "value": 1},
-  {"name": "2", "value": 2},
-  {"name": "3", "value": 3},
-  {"name": "4", "value": 4},
-  {"name": "6", "value": 6},
-  {"name": "Wide", "value": 2},
-  {"name": "No-ball", "value": 2},
-  {"name": "W", "value": 0},
+  {"name": "0", "value": 0, "color": Colors.green},
+  {"name": "1", "value": 1, "color": Colors.green},
+  {"name": "2", "value": 2, "color": Colors.green},
+  {"name": "3", "value": 3, "color": Colors.green},
+  {"name": "4", "value": 4, "color": Colors.green},
+  {"name": "6", "value": 6, "color": Colors.green},
+  {"name": "Wide", "value": 2, "color": Colors.orange},
+  {"name": "No-ball", "value": 2, "color": Colors.orange},
+  {"name": "Wicket", "value": 0, "color": Colors.red},
 ];
 
 class _AddScoreState extends State<AddScore> {
@@ -37,14 +37,12 @@ class _AddScoreState extends State<AddScore> {
   var bowlingTeam;
 
   String? _batsman1;
-  String? _batsman2;
   String? _bowler;
 
   late String path;
 
   late DatabaseReference _dbRef;
   late DatabaseReference _dbRef2;
-  late DatabaseReference _dbRefScore;
 
   @override
   void initState() {
@@ -56,7 +54,6 @@ class _AddScoreState extends State<AddScore> {
     print(path);
     _dbRef = FirebaseDatabase.instance.ref(path);
     _dbRef2 = FirebaseDatabase.instance.ref("currentMatchScore");
-    _dbRefScore = FirebaseDatabase.instance.ref("currentMatchScore");
 
     setState(() {
       if (widget.Batting == 'team1') {
@@ -145,93 +142,75 @@ class _AddScoreState extends State<AddScore> {
             height: 1,
             thickness: 5,
           ),
-          SizedBox(
-            width: 400,
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'Batsman 1',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                SizedBox(
+                  height: 100,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Batsman',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      DropdownButton(
+                          value: _batsman1,
+                          hint: Text("Select 1st Batsman"),
+                          items: battingTeam.map<DropdownMenuItem<String>>((value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              _batsman1 = value as String?;
+                            });
+                          }),
+                    ],
+                  ),
                 ),
-                const SizedBox(
-                  width: 10,
+                SizedBox(width: 20,),
+                SizedBox(
+                  height: 100,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Bowler',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(
+                        width: 35,
+                      ),
+                      DropdownButton(
+                          value: _bowler,
+                          hint: Text("Select Bowler"),
+                          items: bowlingTeam.map<DropdownMenuItem<String>>((value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              _bowler = value as String?;
+                            });
+                          }),
+                    ],
+                  ),
                 ),
-                DropdownButton(
-                    value: _batsman1,
-                    hint: Text("Select 1st Batsman"),
-                    items: battingTeam.map<DropdownMenuItem<String>>((value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        _batsman1 = value as String?;
-                      });
-                    }),
               ],
             ),
           ),
-          SizedBox(
-            width: 400,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Batsman 2',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                DropdownButton(
-                    value: _batsman2,
-                    hint: Text("Select 2nd Batsman"),
-                    items: battingTeam.map<DropdownMenuItem<String>>((value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        _batsman2 = value as String?;
-                      });
-                    }),
-              ],
-            ),
-          ),
-          SizedBox(
-            width: 400,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Bowler',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                ),
-                const SizedBox(
-                  width: 35,
-                ),
-                DropdownButton(
-                    value: _bowler,
-                    hint: Text("Select Bowler"),
-                    items: bowlingTeam.map<DropdownMenuItem<String>>((value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        _bowler = value as String?;
-                      });
-                    }),
-              ],
-            ),
-          ),
+
           const SizedBox(
             height: 40,
           ),
@@ -244,15 +223,14 @@ class _AddScoreState extends State<AddScore> {
               crossAxisCount: 3,
               children: scoreList.map((score) {
                 return ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: score["color"]),
                   onPressed: () {
                     if (_batsman1 == null) {
                       Utils.showErrorDialog(context, 'Select Batsman 1');
-                    } else if (_batsman2 == null) {
-                      Utils.showErrorDialog(context, 'Select Batsman 2');
                     } else if (_bowler == null) {
                       Utils.showErrorDialog(context, 'Select Bowler');
                     } else {
-                      _addToDB(_batsman1!, _batsman2!, _bowler!, score["value"],
+                      _addToDB(_batsman1!, _bowler!, score["value"],score["name"],
                           score["name"] == "W" ? true : false);
                     }
                   },
@@ -273,16 +251,12 @@ class _AddScoreState extends State<AddScore> {
     );
   }
 
-  void _addToDB(String batsman1, String batsman2, String bowler, int mark,
+  void _addToDB(String batsman1, String bowler, int mark, String name,
       bool wicket) async {
-    var total = 0;
-    var wickets = 0;
-    var ball = 1;
     try {
       var time = DateTime.now().toString();
       await _dbRef.child("match").push().set({
         'batsman1': batsman1,
-        'batsman2': batsman2,
         'out': wicket,
         'wicket_count': wicket ? 1 : 0,
         'bowler': bowler,
@@ -294,22 +268,8 @@ class _AddScoreState extends State<AddScore> {
       _dbRef2.child(path).update({
         'score': ServerValue.increment(mark),
         'wickets': ServerValue.increment(wicket ? 1 : 0) ,
-        'balls': ServerValue.increment(1),
+        'balls': ServerValue.increment(name == 'No-bal' ? 0 : 1),
       });
-
-      // _dbRef2.child(path).runTransaction((value) async  {
-      //   var snapshot = await value.get(_dbRef2.child(path));
-      //
-      //   int currentScore = snapshot.value ?? 0;
-      //   int newScore = currentScore + mark;
-      //   value.update(_dbRef2.child(path).child('score'), newScore);
-      //
-      //   return {'score': newScore};
-      // } as TransactionHandler).then((data) {
-      //   print('Score incremented to ${data} for match $path');
-      // }).catchError((error) {
-      //   print('Failed to increment score for match $path: $error');
-      // });
 
       print('Data added successfully');
     } catch (error) {
@@ -317,5 +277,4 @@ class _AddScoreState extends State<AddScore> {
     }
   }
 
-  void updateScore() {}
 }
