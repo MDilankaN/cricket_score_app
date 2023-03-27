@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:score_board/Screens/StatsPage.dart';
 import 'package:score_board/utils/Utils.dart';
 
 class TournamentHistory extends StatefulWidget {
@@ -59,6 +60,18 @@ class _TournamentHistoryState extends State<TournamentHistory> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Tournament History'),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.stacked_bar_chart_outlined,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MatchStatistics()));
+              },
+            )
+          ],
         ),
         body: ListView.builder(
             itemCount: keys.length,
@@ -71,8 +84,13 @@ class _TournamentHistoryState extends State<TournamentHistory> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(Utils.getTeamLogo(keys[index][0]), width: 100,),
-                        SizedBox(width: 20,),
+                        Image.asset(
+                          Utils.getTeamLogo(keys[index][0]),
+                          width: 100,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
                         Column(
                           children: [
                             Text(
@@ -110,15 +128,22 @@ class _TournamentHistoryState extends State<TournamentHistory> {
                             )
                           ],
                         ),
-                        SizedBox(width: 20,),
-                        Image.asset(Utils.getTeamLogo(keys[index][keys[index].length - 1]), width: 100,),
-
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Image.asset(
+                          Utils.getTeamLogo(
+                              keys[index][keys[index].length - 1]),
+                          width: 100,
+                        ),
                       ],
                     ),
-                    Divider(thickness: 5,color: Colors.green,)
+                    Divider(
+                      thickness: 5,
+                      color: Colors.green,
+                    )
                   ],
                 ),
-
               );
             }));
   }

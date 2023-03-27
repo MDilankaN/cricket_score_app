@@ -26,6 +26,7 @@ List<Map> scoreList = [
   {"name": "2", "value": 2, "color": Colors.green},
   {"name": "3", "value": 3, "color": Colors.green},
   {"name": "4", "value": 4, "color": Colors.green},
+  {"name": "5", "value": 5, "color": Colors.green},
   {"name": "6", "value": 6, "color": Colors.green},
   {"name": "Wide", "value": 4, "color": Colors.orange},
   {"name": "No-ball", "value": 2, "color": Colors.orange},
@@ -43,6 +44,8 @@ class _AddScoreState extends State<AddScore> {
 
   late DatabaseReference _dbRef;
   late DatabaseReference _dbRef2;
+  late DatabaseReference _dbRefBowlers;
+  late DatabaseReference _dbRefBatsmen;
 
   @override
   void initState() {
@@ -54,6 +57,8 @@ class _AddScoreState extends State<AddScore> {
     print(path);
     _dbRef = FirebaseDatabase.instance.ref(path);
     _dbRef2 = FirebaseDatabase.instance.ref("currentMatchScore");
+    _dbRefBowlers = FirebaseDatabase.instance.ref("bowlers");
+    _dbRefBatsmen = FirebaseDatabase.instance.ref("batsmen");
 
     setState(() {
       if (widget.Batting == 'team1') {
@@ -270,6 +275,16 @@ class _AddScoreState extends State<AddScore> {
         'wickets': ServerValue.increment(wicket ? 1 : 0) ,
         'balls': ServerValue.increment(name == 'No-bal' ? 0 : 1),
       });
+
+      _dbRefBatsmen.child(batsman1).update({
+        'score': ServerValue.increment(mark),
+      });
+
+      if(wicket){
+        _dbRefBowlers.child(bowler).update({
+          "Wickets": ServerValue.increment(1)
+        });
+      }
 
       print('Data added successfully');
     } catch (error) {
